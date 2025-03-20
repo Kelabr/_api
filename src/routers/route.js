@@ -41,4 +41,18 @@ export default async function router(app, options){
 
         res.send({message:"Succes Login"})
     })
+
+    app.post("/register", async (req, res)=>{
+        const {name,email,sex,password} = req.body
+
+        const instance = manipulationMongoDb("teste", "users")
+
+        const data = await instance.insertOne({name, email, sex, password})
+
+        if(!data){
+            res.send({message:"Erro register"})
+        }
+
+        res.send({message:"Succes register"})
+    })
 }
